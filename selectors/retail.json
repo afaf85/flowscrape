@@ -1,0 +1,9 @@
+{
+  "list": ".product, .item, .card, [data-product]",
+  "fields": {
+    "title": [".title", ".name", "a[href*='product']"],
+    "price": [".price", "[data-price]"],
+    "image": ["img[src]"],
+    "sku": [".sku", "[data-sku]"]
+  }
+}

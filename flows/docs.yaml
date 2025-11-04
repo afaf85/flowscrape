@@ -1,0 +1,8 @@
+# Docs crawler (just collect headings and links)
+steps:
+  - goto: "{{ url }}"
+  - collect:
+      list: "article, main, section"
+      fields:
+        title: "h1, h2"
+        href: "a[href]"

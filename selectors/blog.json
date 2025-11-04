@@ -1,0 +1,1 @@
+{ "open_menu": ["button[aria-label*='menu' i]"], "category_links": ["a[href*='/collections']"], "product_list": ["[data-product-list] a[href*='/product']"] }

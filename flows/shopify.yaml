@@ -1,0 +1,21 @@
+# Shopify base flow
+steps:
+  - goto: "{{ url }}"
+  - maybeScroll: true
+  - dismissModals: true
+  - clickIfVisible:
+      preset: open_menu
+      maxTries: 1
+  - clickIfVisible:
+      preset: category_links
+      maxTries: 2
+  - waitFor: "[data-product-grid], .grid, .collection"
+  - collect:
+      list: "[data-product-grid] > * , .grid__item, .card"
+      fields:
+        title: ".card__heading a, .product-title, .product-item__title"
+        price: ".price-item, .price__regular, .price__sale"
+        image: ".card__media img, img[srcset], img[src]"
+        sku: ""
+  - paginate:
+      next: "a[rel='next'], .pagination__next"

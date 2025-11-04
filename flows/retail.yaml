@@ -1,0 +1,15 @@
+# Generic e-commerce fallback
+steps:
+  - goto: "{{ url }}"
+  - maybeScroll: true
+  - dismissModals: true
+  - waitFor: ".product, .item, .card, [data-product]"
+  - collect:
+      list: ".product, .item, .card, [data-product]"
+      fields:
+        title: ".title, .name, a[href*='product']"
+        price: ".price, [data-price]"
+        image: "img[src]"
+        sku: "[data-sku], .sku"
+  - paginate:
+      next: "a[rel='next'], .next, .pagination-next"

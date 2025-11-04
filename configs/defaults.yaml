@@ -1,0 +1,16 @@
+headless: true
+viewport: "1400x1000"
+debug:
+  routing: false
+  clicks: true
+  steps: true
+  network: true
+  trace: false
+i18n:
+  acceptWords: ["accept all","accept cookies","i agree","got it","continue","enter","yes","allow","aceptar","aceptar todo","aceptar cookies","continuar","sí"]
+  closeWords:  ["close","dismiss","no thanks","cerrar","omitir","ok"]
+  shopWords:   ["shop","store","catalog","products","tienda","productos","browse","search"]
+heavySite:
+  blockAnalytics: true
+  blockedResourceTypes: ["image","media","font"]
+  blockedHostsRe: ""

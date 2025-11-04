@@ -1,0 +1,31 @@
+{
+  "list": "[id*='product-grid'] .grid__item, [data-product-grid] > *, .collection .grid__item, .card",
+  "fields": {
+    "title": [
+      ".card__heading a",
+      ".card__information a",
+      ".product-title",
+      ".product-item__title",
+      ".card-information__text",
+      ".card__content a"
+    ],
+    "price": [
+      ".price__regular .price-item--regular",
+      ".price__sale .price-item--sale",
+      ".price__container .price-item",
+      ".card-information .price",
+      ".price .price-item--regular",
+      ".price .price-item",
+      "[class*='price'] .price-item"
+    ],
+    "image": [
+      ".card__media img",
+      ".media img",
+      ".product-item__image-wrapper img",
+      "img[srcset]",
+      "img[src]"
+    ],
+    "sku": [],
+    "href": ["a[href*='/products/']", "a.card__heading[href]", "a[href*='/product']"]
+  }
+}

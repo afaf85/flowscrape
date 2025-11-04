@@ -1,0 +1,107 @@
+# flows/unified.yaml — minimal, generic, SPA-friendly
+steps:
+  # 1) Land and wake the page
+  - goto: "{{ url }}"
+  - maybeScroll: true
+  - wait: 200
+
+  # 2) Try clearing popups/banners twice (engine uses i18n word lists)
+  - repeat:
+      times: 2
+      steps:
+        - clickIfVisible:
+            anyOf:
+              - { css: "#onetrust-accept-btn-handler" }
+              - { css: ".ot-sdk-container #onetrust-accept-btn-handler" }
+              - { css: "button[aria-label*='accept' i]" }
+              - { css: "[aria-label*='close' i], .close, .popup-close, .modal__close, .mfp-close" }
+        - wait: 150
+
+  # 3) Try opening a menu if present (broad nav toggles)
+  - clickIfVisible:
+      anyOf:
+        - { css: "button[aria-label*='menu' i]" }
+        - { css: "[data-testid*='menu' i]" }
+        - { css: "button[aria-controls*='nav' i]" }
+        - { css: ".menu-toggle, .hamburger" }
+  - waitFor:
+      anyOf:
+        - { css: "nav, [role='navigation']" }
+      timeoutMs: 3000
+
+  # 4) Try navigating toward shopping/product areas (generic links + words)
+  - clickIfVisible:
+      anyOf:
+        - { css: "a[href*='/shop']" }
+        - { css: "a[href*='/store']" }
+        - { css: "a[href*='/catalog']" }
+        - { css: "a[href*='/products']" }
+        - { css: "a[href*='/search']" }
+        - { css: "a", text: "(?i)shop|store|catalog|products|tienda|productos|browse|search" }
+  - wait: 200
+  - maybeScroll: true
+
+  # 5) Ensure a product-ish area exists (very broad hints)
+  - waitFor:
+      anyOf:
+        - { css: "[data-product-id]" }
+        - { css: "[data-sku]" }
+        - { css: "article[itemtype*='Product']" }
+        - { css: "[itemscope][itemtype*='Product']" }
+        - { css: ".price, [data-price], [itemprop='price']" }
+      timeoutMs: 8000
+  - maybeScroll: true
+
+  # 6) Collect product cards (loose union of common patterns)
+  - collect:
+      list: |
+        [data-product-id],
+        [data-sku],
+        article[itemtype*="Product"],
+        [itemscope][itemtype*="Product"],
+        [class*="product-card" i],
+        [class*="productTile" i],
+        [class*="product" i][class*="tile" i],
+        .products-grid .product-item,
+        li.product-item,
+        a.product-item-link,
+        .product-grid .product-card,
+        .grid-products .product
+      fields:
+        title: { sel: "h1, h2, h3, .title, .product-item-link, [itemprop='name']", text: true }
+        href:  { sel: "a[href]", attr: "href" }
+        img:   { sel: "img" }
+        price: { sel: "[data-price], .price, [itemprop='price']", text: true }
+        textLen: { textLen: true }
+
+  # 7) One more lazy scroll to surface lazy content
+  - maybeScroll: true
+
+  # 8) Kill late popups once more then attempt a second collect pass
+  - repeat:
+      times: 1
+      steps:
+        - clickIfVisible:
+            anyOf:
+              - { css: "[aria-label*='close' i], .close, .popup-close, .modal__close, .mfp-close" }
+              - { css: "#onetrust-accept-btn-handler" }
+        - wait: 150
+  - collect:
+      list: |
+        [data-product-id],
+        [data-sku],
+        article[itemtype*="Product"],
+        [itemscope][itemtype*="Product"],
+        [class*="product-card" i],
+        [class*="productTile" i],
+        [class*="product" i][class*="tile" i],
+        .products-grid .product-item,
+        li.product-item,
+        a.product-item-link,
+        .product-grid .product-card,
+        .grid-products .product
+      fields:
+        title: { sel: "h1, h2, h3, .title, .product-item-link, [itemprop='name']", text: true }
+        href:  { sel: "a[href]", attr: "href" }
+        img:   { sel: "img" }
+        price: { sel: "[data-price], .price, [itemprop='price']", text: true }

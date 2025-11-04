@@ -1,0 +1,15 @@
+# WooCommerce flow
+steps:
+  - goto: "{{ url }}"
+  - maybeScroll: true
+  - dismissModals: true
+  - waitFor: "ul.products"
+  - collect:
+      list: "ul.products > li"
+      fields:
+        title: ".woocommerce-loop-product__title"
+        price: ".price, .woocommerce-Price-amount"
+        image: "img[src]"
+        sku: ""
+  - paginate:
+      next: ".next, .pagination .next"

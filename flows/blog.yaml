@@ -1,0 +1,8 @@
+# Blog/news crawler
+steps:
+  - goto: "{{ url }}"
+  - collect:
+      list: "article, .post, .blog-post"
+      fields:
+        title: "h1, h2, .post-title"
+        href: "a[href]"

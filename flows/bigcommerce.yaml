@@ -1,0 +1,21 @@
+# BigCommerce-opinionated retail flow
+steps:
+  - goto: "{{ url }}"
+  - maybeScroll: true
+  - dismissModals: true
+  - clickIfVisible:
+      preset: open_menu
+      maxTries: 1
+  - clickIfVisible:
+      preset: category_links
+      maxTries: 2
+  - waitFor: "[data-product-id], .productGrid, .productList"
+  - collect:
+      list: "[data-product-id], .productGrid .card, .product"
+      fields:
+        title: ".card-title a, .product-title, .card__name"
+        price: ".price, [data-product-price], .card-price"
+        image: "img[data-src], img[srcset], img[src]"
+        sku: ""
+  - paginate:
+      next: "a[aria-label*='Next'], .pagination-next"

@@ -1,0 +1,216 @@
+{
+  "zara.com": {
+    "profiles": [
+      {
+        "id": "mhjyfo8u-lu7yj",
+        "match": {
+          "pathRegex": "^/ca(/|$)",
+          "queryKeys": [],
+          "templateHash": "c2857-d176-da2340-ld1-full-width-products-category-page"
+        },
+        "buckets": {
+          "fields": {
+            "title": {
+              "text": true
+            },
+            "href": {
+              "attr": "href"
+            },
+            "image": {
+              "attr": "src"
+            },
+            "price": {
+              "text": true,
+              "textLen": true
+            }
+          },
+          "list": [
+            "div.layout.layout--grid-type-standard.layout-catalog.products-category-view.products-category-view--zoom1 a[href]"
+          ],
+          "anchors": [
+            "div.layout.layout--grid-type-standard.layout-catalog.products-category-view.products-category-view--zoom1 a[href]"
+          ],
+          "containers": [
+            ".layout-categories-category.layout-categories-category--level-1.layout-categories-category-level-1.link.zds-carousel-item.zds-tabs-tab",
+            ".layout-categories__tabs-panel.zds-carousel-item.zds-tabs-tab-panel",
+            ".sdui-carousel-item",
+            ".product-grid-block-dynamic.product-grid-block-dynamic__container.product-grid-block-dynamic__container--3BMAN-AW25.products-category-grid-block.products-category-grid-block--is-template",
+            ".product-grid-block-dynamic__row",
+            ".product-grid-product.product-grid-product--0th-column.product-grid-product--ZOOM1-columns",
+            ".product-grid-product__figure",
+            ".link.product-grid-product__link.product-link",
+            ".products-category-grid-media-container",
+            ".media.products-category-grid-media",
+            ".product-add-to-cart.product-add-to-cart--full.product-grid-product__add-to-cart",
+            ".product-add-to-cart__button",
+            ".product-add-to-cart__button-icon",
+            ".product-grid-product__data",
+            ".product-grid-product.product-grid-product--1th-column.product-grid-product--ZOOM1-columns",
+            ".product-grid-block-dynamic__product-info",
+            ".product-grid-product-info",
+            ".product-grid-product-info__product-header.product-grid-product-info__product-header--with-wishlist",
+            ".product-grid-product-info__main-info",
+            ".link.product-grid-product-info__name.product-link"
+          ],
+          "broad": [
+            "main a[href]",
+            "body a[href]"
+          ],
+          "candidates": [
+            "[data-product]",
+            "[data-item]",
+            "[data-sku]",
+            "[itemscope][itemtype*='Product']"
+          ]
+        },
+        "metrics": {
+          "runs": 2,
+          "avgItems": 48,
+          "lastSeen": "2025-11-04T02:52:40.499Z"
+        }
+      }
+    ]
+  },
+  "hpgbrands.com": {
+    "profiles": [
+      {
+        "id": "mhjz6gfh-a78uc",
+        "match": {
+          "pathRegex": "^/best-sellers(/|$)",
+          "queryKeys": [],
+          "templateHash": "c640-d705-da342-ld1-page-category-logo-position-left"
+        },
+        "buckets": {
+          "fields": {
+            "title": {
+              "text": true
+            },
+            "href": {
+              "attr": "href"
+            },
+            "image": {
+              "attr": "src"
+            },
+            "price": {
+              "text": true,
+              "textLen": true
+            }
+          },
+          "list": [
+            "div.ss__results.product-grid.grid-container.product-grid-usd a[href]"
+          ],
+          "anchors": [
+            "div.ss__results.product-grid.grid-container.product-grid-usd a[href]"
+          ],
+          "containers": [
+            ".search__brands-dropdown-item.test",
+            ".ss__expanded.ss__facet.ss__facet--list.ss__sidebar--item",
+            ".main-navigation-item.main-navigation-item-parent",
+            ".main-navigation-item-toggle",
+            ".main-navigation-item.main-navigation-item-all",
+            ".main-navigation-item",
+            ".has-children.main-navigation-item",
+            ".grid-item.product-grid-item.ss__result.ss__result--item",
+            ".grid-item-image-container.ratio-1-1",
+            ".grid-item-image.lazyloaded.ls-is-cached",
+            ".grid-item-overlay",
+            ".focus-outline.grid-item-overlay-link",
+            ".product-card__logo",
+            ".product-grid-item-name",
+            ".product-card__details-wrapper",
+            ".here.product-card__details-wrapper",
+            ".grid-item-compare",
+            ".grid-item-image.lazyload",
+            ".footer__link-item"
+          ],
+          "broad": [
+            "main a[href]",
+            "body a[href]"
+          ],
+          "candidates": [
+            "[data-product]",
+            "[data-item]",
+            "[data-sku]",
+            "[itemscope][itemtype*='Product']"
+          ]
+        },
+        "metrics": {
+          "runs": 2,
+          "avgItems": 24,
+          "lastSeen": "2025-11-04T03:17:37.745Z"
+        }
+      }
+    ]
+  },
+  "allbirds.ca": {
+    "profiles": [
+      {
+        "id": "mhjz89w6-92ca9",
+        "match": {
+          "pathRegex": "^/collections(/|$)",
+          "queryKeys": [],
+          "templateHash": "c1562-d999-da2595-ld0-template-collection"
+        },
+        "buckets": {
+          "fields": {
+            "title": {
+              "text": true
+            },
+            "href": {
+              "attr": "href"
+            },
+            "price": {
+              "text": true,
+              "textLen": true
+            },
+            "image": {
+              "attr": "src"
+            }
+          },
+          "list": [
+            "a[href*='/product']"
+          ],
+          "anchors": [
+            "a[href*='/product']",
+            "[id*='product-grid'] .grid__item a[href]",
+            ".collection .grid__item a[href]",
+            "[id*='product-grid'] .collection-product a[href]"
+          ],
+          "containers": [
+            "[id*='product-grid'] .grid__item",
+            ".collection .grid__item",
+            "[id*='product-grid'] .collection-product",
+            ".flex.flex-col.lg:gap-10.lg:grid.lg:grid-cols-3.lg:justify-between.lg:p-14.pt-15",
+            ".link-item",
+            ".focus-inset.link.link--text.list-menu__item.menu-drawer__menu-item",
+            ".focus-inset.grandchild__link--item.link.link--text.list-menu__item.menu-drawer__menu-item",
+            ".gap-1.grid.grid-cols-1.lg:gap-4.relative",
+            ".before:-bottom-0.before:-left-0.before:-right-0.before:-top-0.before:absolute.before:bg-main-background.before:content-[''].before:shadow-[0px_6px_24px_0px_#D3D4D5].before:z-[-1].focus-within:z-10.group.lg:before:-bottom-6.lg:before:-left-6.lg:before:-right-6.lg:before:-top-6.lg:before:content-none.lg:gap-5.lg:hover:before:content-[''].lg:hover:z-10.product-grid-item__inner.relative",
+            ".gap-3.grid.grid-cols-1.relative.text-sm",
+            ".gap-1.grid.grid-cols-1.lg:p-0.lg:pt-3.product_card--content.pt-0.px-2",
+            ".no-js-hidden.price.product-price",
+            ".price-item.price-item--regular.text-base",
+            ".cr-red.price-item.price-item--last.price-item--sale",
+            ".price-item.price-item--last",
+            ".[&_summary_svg:first-child]:open:hidden.[&_summary_svg:last-child]:hidden.[&_summary_svg:last-child]:open:block.before:-bottom-0.before:-left-0.before:-right-0.before:-top-0.before:absolute.before:bg-main-background.before:content-[''].before:shadow-[white_0px_-10px_0px_0px,_rgba(0,0,0,0.23)_0px_10px_20px_0px].before:z-[-1].border-0.border-main-grey.border-solid.border-t.grid.grid-cols-1.lg:[&_summary_svg]:!hidden.lg:before:-bottom-6.lg:before:-left-6.lg:before:-right-6.lg:before:-top-6.lg:border-0.lg:group-hover:grid.lg:hidden.lg:mt-0.lg:p-0.lg:top-[calc(100%+1.25rem)].px-2.py-3.relative.top-full.w-full"
+          ],
+          "broad": [
+            "main a[href]",
+            "body a[href]"
+          ],
+          "candidates": [
+            "[data-product]",
+            "[data-item]",
+            "[data-sku]",
+            "[itemscope][itemtype*='Product']"
+          ]
+        },
+        "metrics": {
+          "runs": 2,
+          "avgItems": 103,
+          "lastSeen": "2025-11-04T03:15:14.066Z"
+        }
+      }
+    ]
+  }
+}

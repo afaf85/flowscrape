@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "dev": "tsx ./src/cli.ts",
+    "clean": "node -e \"try{require('fs').rmSync('storage',{recursive:true,force:true})}catch{}\"",
+    "peek": "node -e \"const fs=require('fs');if(fs.existsSync('storage/items.jsonl')){console.log(fs.readFileSync('storage/items.jsonl','utf8').split(/\\r?\\n/).filter(Boolean).slice(0,3).join('\\n'))}else{console.log('No items yet')}\""
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "playwright": "^1.56.1",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "name": "flowscrape",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
