@@ -37,6 +37,13 @@
         FS_LOG_LEVEL=info npm run dev -- https://www.zara.com/ca/en/man-shoes-l715.html --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.bestbuy.ca/en-ca/category/laptops/36711 --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://hpgbrands.com/best-sellers/ --raw --no-headless
+        FS_LOG_LEVEL=info npm run dev -- https://kyliecosmetics.com/shop/ --raw --no-headless
+        FS_LOG_LEVEL=info npm run dev -- https://www.everlane.com/collections/mens-tops --raw --no-headless
+        FS_LOG_LEVEL=info npm run dev -- https://www.blueland.com/collections/all --raw --no-headless
+        FS_LOG_LEVEL=info npm run dev -- https://www.staples.ca/collections/computers-89 --raw --no-headless
+
+
+
 
 
 

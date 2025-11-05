@@ -93,9 +93,13 @@ function normalizeHref(href: string) {
 }
 
 function findNearestProductCard($: CheerioAPI, el: Cheerio<any>): Cheerio<any> {
-  const wrapperSel = PRODUCT_CARD_WRAPPERS.join(",");
+  const wrapperSel = [
+    ...PRODUCT_CARD_WRAPPERS,
+    "[data-product]", "[data-item]", "[data-sku]",
+    "[itemscope][itemtype*='Product']",
+    ".grid__item", ".card", ".product", ".product-card", ".product-tile"
+  ].join(",");
   if (el.is(wrapperSel)) return el;
-
   const parents = el.parents();
   for (let i = 0; i < parents.length; i++) {
     const p = parents.eq(i);
@@ -209,7 +213,9 @@ function planForField(
   if (name === "price") attr = [];
 
   const mode: ("text" | "html")[] =
-    lf.html ? ["html"] : ["text"];
+    name === "title" || name === "description"
+      ? (lf.html ? ["html"] : ["text"])
+      : []; // href/image => no text fallback; price already text-only via attr=[]
   return { sels: selsWithSelf, attr, mode };
 }
 
@@ -590,14 +596,13 @@ export function extractItems(
         item.price = undefined; // invalid, retry in resolver
       }
 
-      if (!item.image || (!likelyImagePath(item.image) && isUrlish(item.image))) {
+      if (!item.image) {
         const img = card.find("img[data-src], img[srcset], img[src]").first();
         const c =
           img.attr("data-src") ||
           (img.attr("srcset") || "").split(",")[0]?.trim().split(/\s+/)[0] ||
           img.attr("src");
         if (c) item.image = pickBestSrc(c);
-        if (item.image && !likelyImagePath(item.image)) item.image = undefined;
       }
 
       if (!item.href) {
