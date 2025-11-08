@@ -11,7 +11,11 @@ import { writePageOnce, writeItems, getStats } from "./storage/storage.js";
 import { waitIdle } from "./steps/steps.js";
 import { classifyPage } from "./detect/router.js";
 import { loadSelectors } from "./utils.js";
-import { enableTeachMode, waitForTeachOverlay } from "./learn/manual.js";
+import {
+  enableTeachMode,
+  waitForTeachOverlay,
+  waitForTeachSave,
+} from "./learn/manual.js";
 
 /* logging */
 const LOG_LEVEL = (process.env.FS_LOG_LEVEL || "info").toLowerCase();
@@ -171,184 +175,226 @@ export async function runRaw(
   loadLearnedSelectors();
 
   const browser = await chromium.launch({ headless: opts.headless ?? true });
-  const page = await browser.newPage();
+  const context = await browser.newContext({
+    bypassCSP: true,
+    ignoreHTTPSErrors: true,
+    viewport: { width: 1366, height: 900 },
+    timezoneId: "America/Toronto",
+    locale: "en-CA",
+    userAgent:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+      "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 FlowScrape/1.0",
+  });
+  const page = await context.newPage();
 
-  /* ========== TEACH overlay injection (opt-in) ========== */
-  if (opts.teach) {
-    await enableTeachMode(page, url, log);
-  }
-  /* ========== /TEACH overlay injection ========== */
-
-  log.info("[raw] launching:", url);
-  const ok = await safeInitialGoto(page, url);
-  if (ok) await waitIdle(page, 200);
-
-  if (opts.teach) {
-    await waitForTeachOverlay(page, log);
-  }
-
-  const html = await safeGetContent(page);
-  log.debug("[raw] initial HTML length:", html.length);
-
-  const host = new URL(url).host;
-  log.info("[raw] host:", host);
-
-  /* ensure page actually rendered products */
-  await page.waitForTimeout(1000);
-  await ensureCollectionReady(page);
-  const finalHtml = await safeGetContent(page);
-
-  /* learned — score against fully-rendered HTML */
-  const { profile, buckets: learned, score } = getBestProfile(host, url, finalHtml);
-  const learnedList = toArray(learned.list);
-  log.info(
-    "[raw] learned profile:",
-    profile?.id || "(none)",
-    "score:",
-    score,
-    "list:",
-    learnedList.length,
-    "anchors:",
-    learned.anchors?.length || 0,
-    "containers:",
-    learned.containers?.length || 0,
-    "broad:",
-    learned.broad?.length || 0,
-    "candidates:",
-    learned.candidates?.length || 0
-  );
-  const COLD_THRESHOLD = 2;
-  const isCold = (score ?? 0) < COLD_THRESHOLD;
-
-  /* autodetect (use finalHtml) */
-  const auto = (autodetectFromHtml(finalHtml, url) as AutoDetectLike | null) || null;
-
-  /* classification (only if nothing at all) — use finalHtml too */
-  let classified: any = null;
-  if (!auto?.listSelector && !learnedList.length) {
-    const cls = await classifyPage(finalHtml, url);
-    const kind = typeof cls === "string" ? cls : cls?.kind;
-    if (kind) {
-      classified = loadSelectors(kind);
-      log.info("[raw] classified as:", kind);
+  try {
+    /* ========== TEACH overlay injection (opt-in) ========== */
+    if (opts.teach) {
+      await enableTeachMode(page, url, log);
     }
-  }
+    /* ========== /TEACH overlay injection ========== */
 
-  /* fields (make mutable for assisted merge) */
-  let fields: Record<string, { sel: string; attr?: string }> = {
-    ...(classified?.fields || {}),
-    ...(auto?.fields || {}),
-    ...(learned?.fields || {}),
-  };
-  log.debug("[raw] merged field keys:", Object.keys(fields));
+    log.info("[raw] launching:", url);
+    const ok = await safeInitialGoto(page, url);
+    if (ok) await waitIdle(page, 200);
 
-  /* ---------------- assisted learn (opt-in & lazy) ---------------- */
-  let assistBuckets:
-    | { anchors: string[]; containers: string[]; candidates: string[] }
-    | undefined;
+    if (opts.teach) {
+      await waitForTeachOverlay(page, log);
 
-  if (opts.assist) {
-    try {
-      const mod = await import("./learn/assisted_learn.js");
-      const assist = await (mod as any).runAssistedLearn({
-        url,
-        html: finalHtml,
-        seeds: { list: toArray(auto?.listSelector), fields },
-      });
+      // ⏸️ Block the flow until the overlay emits a deterministic save beacon
+      const saved = await waitForTeachSave(page, log);
+      if (!saved) {
+        log.warn("[teach] No picks received before timeout; continuing without manual picks");
+      } else {
+        const keys = Object.keys(saved.picks || {});
+        log.info("[teach] manual picks saved:", keys.length ? keys : "(none)");
+        // 🔄 Pull fresh learned selectors (now includes manual picks)
+        loadLearnedSelectors();
+      }
 
-      for (const [k, v] of Object.entries(assist.suggestedFields as Record<string, any>)) {
-        if (!fields[k] && v.confidence >= 0.7) {
-          fields[k] = { sel: v.sel, attr: v.attr };
+      log.info("[teach] continuing…");
+    }
+
+    const html = await safeGetContent(page);
+    log.debug("[raw] initial HTML length:", html.length);
+
+    const host = new URL(url).host;
+    log.info("[raw] host:", host);
+
+    /* ensure page actually rendered products */
+    await page.waitForTimeout(1000);
+    await ensureCollectionReady(page);
+    const finalHtml = await safeGetContent(page);
+
+    /* learned — score against fully-rendered HTML */
+    const { profile, buckets: learned, score } = getBestProfile(host, url, finalHtml);
+    const learnedList = toArray(learned.list);
+    log.info(
+      "[raw] learned profile:",
+      profile?.id || "(none)",
+      "score:",
+      score,
+      "list:",
+      learnedList.length,
+      "anchors:",
+      learned.anchors?.length || 0,
+      "containers:",
+      learned.containers?.length || 0,
+      "broad:",
+      learned.broad?.length || 0,
+      "candidates:",
+      learned.candidates?.length || 0
+    );
+    const COLD_THRESHOLD = 2;
+    const isCold = (score ?? 0) < COLD_THRESHOLD;
+
+    /* autodetect (use finalHtml) */
+    const auto = (autodetectFromHtml(finalHtml, url) as AutoDetectLike | null) || null;
+
+    /* classification (only if nothing at all) — use finalHtml too */
+    let classified: any = null;
+    if (!auto?.listSelector && !learnedList.length) {
+      const cls = await classifyPage(finalHtml, url);
+      const kind = typeof cls === "string" ? cls : cls?.kind;
+      if (kind) {
+        classified = loadSelectors(kind);
+        log.info("[raw] classified as:", kind);
+      }
+    }
+
+    /* fields (make mutable for assisted merge)
+       Precedence: classified < autodetect < learned (manual lives in learned). */
+    let fields: Record<string, { sel: string; attr?: string }> = {
+      ...(classified?.fields || {}),
+      ...(auto?.fields || {}),
+      ...(learned?.fields || {}),
+    };
+    log.debug("[raw] merged field keys:", Object.keys(fields));
+
+    /* ---------------- assisted learn (opt-in & lazy) ---------------- */
+    let assistBuckets:
+      | { anchors: string[]; containers: string[]; candidates: string[] }
+      | undefined;
+
+    if (opts.assist) {
+      try {
+        const mod = await import("./learn/assisted_learn.js");
+        const assist = await (mod as any).runAssistedLearn({
+          url,
+          html: finalHtml,
+          seeds: { list: toArray(auto?.listSelector), fields },
+        });
+
+        for (const [k, v] of Object.entries(assist.suggestedFields as Record<string, any>)) {
+          // 🚫 never overwrite manual/learned; only fill gaps
+          if (!fields[k] && v.confidence >= 0.7) {
+            fields[k] = { sel: v.sel, attr: v.attr };
+          }
+        }
+        assistBuckets = assist.suggestedBuckets;
+        if (assist.notes?.length) log.info("[assist] notes:", assist.notes.join(" | "));
+        log.info("[assist] fields suggested:", Object.keys(assist.suggestedFields));
+      } catch (e: any) {
+        log.warn("[assist] failed:", e?.message || String(e));
+      }
+    }
+    /* ---------------------------------------------------------------- */
+
+    /* build buckets to TRY (ordered, no penalizing) */
+    const buckets: Record<string, string[]> = {
+      list: isCold ? [] : learnedList,
+      anchors: unique([
+        ...(learned.anchors || []),
+        ...toArray(auto?.listSelector).map(toAnchorVariant),
+        ...(auto?.candidates || []).filter(isAnchorish),
+      ]),
+      containers: unique([
+        ...(learned.containers || []),
+        ...(auto?.candidates || []).filter(isContainerish),
+      ]),
+      broad: unique([...(learned.broad || []), "a[href*='/product']", "a[href*='/products/']"]),
+      candidates: unique([
+        ...(learned.candidates || []),
+        ...toArray(auto?.listSelector),
+        ...(auto?.candidates || []),
+        ...(Array.isArray(classified?.list) ? classified.list : []),
+      ]),
+    };
+
+    if (assistBuckets) {
+      const prepend = (xs: string[] | undefined, into: string[]) => unique([...(xs || []), ...into]);
+      buckets.anchors    = prepend(assistBuckets.anchors, buckets.anchors).slice(0, 60);
+      buckets.containers = prepend(assistBuckets.containers, buckets.containers).slice(0, 60);
+      buckets.candidates = prepend(assistBuckets.candidates, buckets.candidates).slice(0, 120);
+    }
+
+    /* progressive testing */
+    let items: any[] = [];
+    const winners: string[] = [];
+    const tried: string[] = [];
+
+    for (const [bucketName, sels] of Object.entries(buckets)) {
+      if (!sels.length) continue;
+      log.info(`[raw] trying bucket: ${bucketName} (${sels.length} selectors)`);
+      for (const sel of sels) {
+        tried.push(sel);
+        const res = extractItems(finalHtml, [sel], fields);
+        if (res.length) {
+          log.info(`[raw] ✓ success with ${bucketName}:`, sel, `→ ${res.length} items`);
+          items = res; winners.push(sel); break;
         }
       }
-      assistBuckets = assist.suggestedBuckets;
-      if (assist.notes?.length) log.info("[assist] notes:", assist.notes.join(" | "));
-      log.info("[assist] fields suggested:", Object.keys(assist.suggestedFields));
-    } catch (e: any) {
-      log.warn("[assist] failed:", e?.message || String(e));
-    }
-  }
-  /* ---------------------------------------------------------------- */
-
-  /* build buckets to TRY (ordered, no penalizing) */
-  const buckets: Record<string, string[]> = {
-    list: isCold ? [] : learnedList,
-    anchors: unique([
-      ...(learned.anchors || []),
-      ...toArray(auto?.listSelector).map(toAnchorVariant),
-      ...(auto?.candidates || []).filter(isAnchorish),
-    ]),
-    containers: unique([
-      ...(learned.containers || []),
-      ...(auto?.candidates || []).filter(isContainerish),
-    ]),
-    broad: unique([...(learned.broad || []), "a[href*='/product']", "a[href*='/products/']"]),
-    candidates: unique([
-      ...(learned.candidates || []),
-      ...toArray(auto?.listSelector),
-      ...(auto?.candidates || []),
-      ...(Array.isArray(classified?.list) ? classified.list : []),
-    ]),
-  };
-
-  if (assistBuckets) {
-    const prepend = (xs: string[] | undefined, into: string[]) => unique([...(xs || []), ...into]);
-    buckets.anchors    = prepend(assistBuckets.anchors, buckets.anchors).slice(0, 60);
-    buckets.containers = prepend(assistBuckets.containers, buckets.containers).slice(0, 60);
-    buckets.candidates = prepend(assistBuckets.candidates, buckets.candidates).slice(0, 120);
-  }
-
-  /* progressive testing */
-  let items: any[] = [];
-  const winners: string[] = [];
-  const tried: string[] = [];
-
-  for (const [bucketName, sels] of Object.entries(buckets)) {
-    if (!sels.length) continue;
-    log.info(`[raw] trying bucket: ${bucketName} (${sels.length} selectors)`);
-    for (const sel of sels) {
-      tried.push(sel);
-      const res = extractItems(finalHtml, [sel], fields);
-      if (res.length) {
-        log.info(`[raw] ✓ success with ${bucketName}:`, sel, `→ ${res.length} items`);
-        items = res; winners.push(sel); break;
+      if (items.length) break;
+      const batch = sels.slice(0, 10);
+      if (batch.length) {
+        const res = extractItems(finalHtml, batch, fields);
+        if (res.length) {
+          log.info(`[raw] ✓ batch success in ${bucketName}:`, batch.length, "selectors");
+          items = res; winners.push(...batch); break;
+        }
       }
     }
-    if (items.length) break;
-    const batch = sels.slice(0, 10);
-    if (batch.length) {
-      const res = extractItems(finalHtml, batch, fields);
-      if (res.length) {
-        log.info(`[raw] ✓ batch success in ${bucketName}:`, batch.length, "selectors");
-        items = res; winners.push(...batch); break;
-      }
-    }
+
+    log.info("[raw] extracted items:", items.length);
+    if (!items.length) log.warn("[raw] 0 items — nothing worked this run");
+
+    items = postProcessItems(items, url);
+
+    const good = items.filter(hasTitleHref).length;
+    const precision = items.length ? good / items.length : 0;
+    log.info(`[raw] precision: ${(precision * 100) | 0}% (post-processed count: ${items.length})`);
+
+    await writePageOnce(url, finalHtml);
+    if (items.length) await writeItems(items);
+
+    // ⚖️ Before saving, re-pull latest profile to ensure manual fields (learned) win.
+    const latest = getBestProfile(host, url, finalHtml);
+    const latestFields = (latest?.buckets?.fields as typeof fields) || {};
+    const fieldsForSave: typeof fields = {
+      ...(fields || {}),      // auto/classified/assisted we computed
+      ...(latestFields || {}),// manual/learned override last
+    };
+
+    const learnedPayload = bucketizeForLearning(tried, winners);
+
+    upsertProfile(host, url, finalHtml, {
+      id: (isCold || precision < 0.5) ? undefined : (latest?.profile?.id ?? profile?.id),
+      buckets: { ...learnedPayload, fields: fieldsForSave },
+      metrics: { items: items.length },
+    });
+
+    log.info(
+      "[raw] learned selectors saved (profile:",
+      (isCold || precision < 0.5) ? "new" : (latest?.profile?.id || profile?.id || "default"),
+      ")"
+    );
+
+    const stats = getStats();
+    log.info(`[raw] Summary → pages:${stats.pages} html:${stats.pagesHtml} items:${stats.items}`);
+  } finally {
+    try { await context.close(); } catch {}
+    try { await browser.close(); } catch {}
   }
-
-  log.info("[raw] extracted items:", items.length);
-  if (!items.length) log.warn("[raw] 0 items — nothing worked this run");
-
-  items = postProcessItems(items, url);
-
-  const good = items.filter(hasTitleHref).length;
-  const precision = items.length ? good / items.length : 0;
-  log.info(`[raw] precision: ${(precision * 100) | 0}% (post-processed count: ${items.length})`);
-
-  await writePageOnce(url, finalHtml);
-  if (items.length) await writeItems(items);
-
-  const learnedPayload = bucketizeForLearning(tried, winners);
-  upsertProfile(host, url, finalHtml, {
-    id: (isCold || precision < 0.5) ? undefined : profile?.id,
-    buckets: { ...learnedPayload, fields },
-    metrics: { items: items.length },
-  });
-  log.info("[raw] learned selectors saved (profile:", (isCold || precision < 0.5) ? "new" : (profile?.id || "default"), ")");
-
-  const stats = getStats();
-  log.info(`[raw] Summary → pages:${stats.pages} html:${stats.pagesHtml} items:${stats.items}`);
-
-  await browser.close();
 }
 
 

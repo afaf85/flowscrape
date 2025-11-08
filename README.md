@@ -13,57 +13,59 @@
     FS_LOG_LEVEL=info npm run dev -- https://hpgbrands.com/best-sellers/
     FS_LOG_LEVEL=debug npm run dev -- https://hpgbrands.com/best-sellers/ --no-headless
 
-⚡ Run without classification (raw autodetect mode)
 
+⚡ Run without classification (raw autodetect mode)
     Skip site-type detection and use only autodetect + learned selectors:
 
     npm run dev -- https://www.randomsite.com/shop --raw
     
     Or with browser open and debug logs:
-     
-    FS_LOG_LEVEL=debug npm run dev -- https://hpgbrands.com/best-sellers/ --raw --no-headless
-    FS_LOG_LEVEL=info npm run dev -- https://hpgbrands.com/new/ --raw --no-headless
-    FS_LOG_LEVEL=debug npm run dev -- https://www.nike.com/ca/w/mens-shoes-nik1zy7ok --raw --no-headless
-    FS_LOG_LEVEL=debug npm run dev -- https://www.zara.com/ca/en/man-shoes-l715.html --raw --no-headless
-    FS_LOG_LEVEL=debug npm run dev -- https://weirdsite.com/products --raw --no-headless   
-    FS_LOG_LEVEL=debug npm run dev -- https://www.nike.com/ca/w/mens-shoes-nik1zy7ok --raw --no-headless   
-    FS_LOG_LEVEL=info npm run dev -- https://jefedefilas.com/en/collections/stickers-bicicletas --raw --no-headless   
-    FS_LOG_LEVEL=info npm run dev -- https://jefedefilas.com/en/collections/stickers-bicicletas --raw --no-headless
+        
+        FS_LOG_LEVEL=debug npm run dev -- https://hpgbrands.com/best-sellers/ --raw --no-headless
+        FS_LOG_LEVEL=info npm run dev -- https://hpgbrands.com/new/ --raw --no-headless
+        FS_LOG_LEVEL=debug npm run dev -- https://www.nike.com/ca/w/mens-shoes-nik1zy7ok --raw --no-headless
+        FS_LOG_LEVEL=debug npm run dev -- https://www.zara.com/ca/en/man-shoes-l715.html --raw --no-headless
+        FS_LOG_LEVEL=debug npm run dev -- https://weirdsite.com/products --raw --no-headless   
+        FS_LOG_LEVEL=info npm run dev -- https://jefedefilas.com/en/collections/stickers-bicicletas --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.allbirds.ca/collections/mens-shoes --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.gymshark.com/collections/mens-tops --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://snugzusa.com/category/products --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.pcna.com/en-us/category/bags --raw --no-headless
-        FS_LOG_LEVEL=info npm run dev -- https://www.nike.com/ca/w/mens-shoes-nik1zy7ok --raw --no-headless
-        FS_LOG_LEVEL=info npm run dev -- https://www.zara.com/ca/en/man-shoes-l715.html --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.bestbuy.ca/en-ca/category/laptops/36711 --raw --no-headless
-        FS_LOG_LEVEL=info npm run dev -- https://hpgbrands.com/best-sellers/ --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://kyliecosmetics.com/shop/ --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.everlane.com/collections/mens-tops --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.blueland.com/collections/all --raw --no-headless
         FS_LOG_LEVEL=info npm run dev -- https://www.staples.ca/collections/computers-89 --raw --no-headless
 
-
-
-
-
-
-
-
     This uses engine.raw.ts — ideal for unknown or non-Shopify/BigCommerce sites.
+
+
+🎓 Teach Mode (manual overlay learning)
+    Opens a visual overlay so you can manually pick list and card selectors.
+    Runs engine.teach.ts — stores your selections in storage/learned.json.
+
+        npm run dev -- https://hpgbrands.com/search/#filter:brand:Beacon --teach
+        npm run dev -- https://shop.searchspring.io/search?q=bottle --teach
+        npm run dev -- https://www.allbirds.ca/collections/mens-shoes --teach
+        npm run dev -- https://snugzusa.com/category/products --teach
+        npm run dev -- https://www.pcna.com/en-us/category/bags --teach
+        npm run dev -- https://www.bestbuy.ca/en-ca/category/laptops/36711 --teach
+
+    👉 Tip: Overlay requires visible browser — it will auto-disable headless mode.
+    👉 After saving in overlay, learned selectors persist automatically.
+
 
 🧩 Key outputs
     File	Purpose
-    storage/items.jsonl	Extracted products/data
+    storage/items.jsonl	        Extracted products/data
     storage/pages.html.jsonl	Saved HTML snapshots
-    storage/learned.json	Remembered selectors per host
+    storage/learned.json	    Remembered selectors per host
+
     🔍 Check logs
 
     Classified as: → site type (normal flow)
-
     best list selector found: → detected grid selector
-
     extracted items: → extraction worked
-
     learned selectors saved: → auto-learning succeeded
-
     [raw] extracted items: → autodetect mode working (raw flow)
+    [teach] manual picks saved: → teach overlay selectors persisted

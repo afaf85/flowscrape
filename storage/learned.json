@@ -1,62 +1,42 @@
 {
-  "zara.com": {
+  "hpgbrands.com": {
     "profiles": [
       {
-        "id": "mhjyfo8u-lu7yj",
+        "id": "mhpr2y39-cq4vr",
         "match": {
-          "pathRegex": "^/ca(/|$)",
-          "queryKeys": [],
-          "templateHash": "c2857-d176-da2340-ld1-full-width-products-category-page"
+          "templateHash": "c629-d748-da335-ld1-page-category-logo-position-left"
         },
         "buckets": {
           "fields": {
             "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
+              "sel": "#searchspring-content:nth-of-type(3) > div.ss__content\\ ss__theme > div.ss__results\\ product-grid\\ grid-container\\ product-grid-usd:nth-of-type(3) > article.ss__result\\ grid-item\\ product-grid-item\\ ss__result--item:nth-of-type(1) > h2.product-grid-item-name > a.focus-outline",
+              "attr": "text"
             },
             "image": {
+              "sel": "div.ss__content\\ ss__theme > div.ss__results\\ product-grid\\ grid-container\\ product-grid-usd:nth-of-type(3) > article.ss__result\\ grid-item\\ product-grid-item\\ ss__result--item:nth-of-type(1) > div.grid-item-image-container\\ ratio-1-1:nth-of-type(1) > div.grid-item-overlay:nth-of-type(2) > a.grid-item-overlay-link\\ focus-outline",
               "attr": "src"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
             }
           },
-          "list": [
-            "div.layout.layout--grid-type-standard.layout-catalog.products-category-view.products-category-view--zoom1 a[href]",
-            ".product-grid-block-dynamic.product-grid-block-dynamic__container.product-grid-block-dynamic__container--6AMAN-AW25.products-category-grid-block.products-category-grid-block--is-template > .product-grid-block-dynamic__row"
-          ],
-          "anchors": [
-            "div.layout.layout--grid-type-standard.layout-catalog.products-category-view.products-category-view--zoom1 a[href]",
-            ".product-grid-block-dynamic.product-grid-block-dynamic__container.product-grid-block-dynamic__container--6AMAN-AW25.products-category-grid-block.products-category-grid-block--is-template > .product-grid-block-dynamic__row a[href]"
-          ],
           "containers": [
-            ".layout-categories-category.layout-categories-category--level-1.layout-categories-category-level-1.link.zds-carousel-item.zds-tabs-tab",
-            ".layout-categories__tabs-panel.zds-carousel-item.zds-tabs-tab-panel",
-            ".sdui-carousel-item",
-            ".product-grid-block-dynamic.product-grid-block-dynamic__container.product-grid-block-dynamic__container--3BMAN-AW25.products-category-grid-block.products-category-grid-block--is-template",
-            ".product-grid-block-dynamic__row",
-            ".product-grid-product.product-grid-product--0th-column.product-grid-product--ZOOM1-columns",
-            ".product-grid-product__figure",
-            ".link.product-grid-product__link.product-link",
-            ".products-category-grid-media-container",
-            ".media.products-category-grid-media",
-            ".product-add-to-cart.product-add-to-cart--full.product-grid-product__add-to-cart",
-            ".product-add-to-cart__button",
-            ".product-add-to-cart__button-icon",
-            ".product-grid-product__data",
-            ".product-grid-product.product-grid-product--1th-column.product-grid-product--ZOOM1-columns",
-            ".product-grid-block-dynamic__product-info",
-            ".product-grid-product-info",
-            ".product-grid-product-info__product-header.product-grid-product-info__product-header--with-wishlist",
-            ".product-grid-product-info__main-info",
-            ".link.product-grid-product-info__name.product-link",
-            ".products-category-grid-block-dynamic-carousel__item.zds-carousel-item",
-            ".product-grid__block-separator.products-category-grid-separator",
-            ".product-grid-product.product-grid-product--2th-column.product-grid-product--ZOOM1-columns",
-            ".product-grid-block-dynamic.product-grid-block-dynamic__container.product-grid-block-dynamic__container--6AMAN-AW25.products-category-grid-block.products-category-grid-block--is-template"
+            ".search__brands-dropdown-item.test",
+            ".ss__expanded.ss__facet.ss__facet--list.ss__sidebar--item",
+            ".main-navigation-item.main-navigation-item-parent",
+            ".main-navigation-item-toggle",
+            ".main-navigation-item.main-navigation-item-all",
+            ".main-navigation-item",
+            ".has-children.main-navigation-item",
+            ".grid-item.product-grid-item.ss__result.ss__result--item",
+            ".grid-item-image-container.ratio-1-1",
+            ".grid-item-image.lazyloaded.ls-is-cached",
+            ".grid-item-overlay",
+            ".focus-outline.grid-item-overlay-link",
+            ".product-card__logo",
+            ".product-grid-item-name",
+            ".product-card__details-wrapper",
+            ".here.product-card__details-wrapper",
+            ".grid-item-compare",
+            ".grid-item-image.lazyload",
+            ".footer__link-item"
           ],
           "broad": [
             "main a[href]",
@@ -70,9 +50,67 @@
           ]
         },
         "metrics": {
-          "runs": 5,
-          "avgItems": 80,
-          "lastSeen": "2025-11-04T16:18:25.946Z"
+          "runs": 3,
+          "avgItems": 7,
+          "lastSeen": "2025-11-08T04:07:22.870Z"
+        }
+      },
+      {
+        "id": "mhprju9p-5u0ss",
+        "match": {
+          "templateHash": "c629-d748-da335-ld1-page-category-logo-position-left"
+        },
+        "buckets": {
+          "fields": {
+            "image": {
+              "abs": "div.ss__content\\ ss__theme > div.ss__results\\ product-grid\\ grid-container\\ product-grid-usd:nth-of-type(3) > article.ss__result\\ grid-item\\ product-grid-item\\ ss__result--item:nth-of-type(1) > div.grid-item-image-container\\ ratio-1-1:nth-of-type(1) > div.grid-item-overlay:nth-of-type(2) > a.grid-item-overlay-link\\ focus-outline",
+              "attr": "src"
+            },
+            "title": {
+              "abs": "#searchspring-content:nth-of-type(3) > div.ss__content\\ ss__theme > div.ss__results\\ product-grid\\ grid-container\\ product-grid-usd:nth-of-type(3) > article.ss__result\\ grid-item\\ product-grid-item\\ ss__result--item:nth-of-type(1) > h2.product-grid-item-name > a.focus-outline",
+              "attr": "text"
+            },
+            "price": {
+              "abs": "#searchspring-content:nth-of-type(3) > div.ss__content\\ ss__theme > div.ss__results\\ product-grid\\ grid-container\\ product-grid-usd:nth-of-type(3) > article.ss__result\\ grid-item\\ product-grid-item\\ ss__result--item:nth-of-type(1) > div.product-card__details-wrapper\\ here:nth-of-type(3) > span.pc__as-low-as\\ usd\\ price:nth-of-type(1)",
+              "attr": "text"
+            }
+          },
+          "containers": [
+            ".search__brands-dropdown-item.test",
+            ".ss__expanded.ss__facet.ss__facet--list.ss__sidebar--item",
+            ".main-navigation-item.main-navigation-item-parent",
+            ".main-navigation-item-toggle",
+            ".main-navigation-item.main-navigation-item-all",
+            ".main-navigation-item",
+            ".has-children.main-navigation-item",
+            ".grid-item.product-grid-item.ss__result.ss__result--item",
+            ".grid-item-image-container.ratio-1-1",
+            ".grid-item-image.lazyloaded.ls-is-cached",
+            ".grid-item-overlay",
+            ".focus-outline.grid-item-overlay-link",
+            ".product-card__logo",
+            ".product-grid-item-name",
+            ".product-card__details-wrapper",
+            ".here.product-card__details-wrapper",
+            ".grid-item-compare",
+            ".grid-item-image.lazyload",
+            ".footer__link-item"
+          ],
+          "broad": [
+            "main a[href]",
+            "body a[href]"
+          ],
+          "candidates": [
+            "[data-product]",
+            "[data-item]",
+            "[data-sku]",
+            "[itemscope][itemtype*='Product']"
+          ]
+        },
+        "metrics": {
+          "runs": 1,
+          "avgItems": 1,
+          "lastSeen": "2025-11-08T04:07:19.957Z"
         }
       }
     ]
@@ -80,41 +118,22 @@
   "allbirds.ca": {
     "profiles": [
       {
-        "id": "mhjz89w6-92ca9",
+        "id": "mhprly3w-mbaoc",
         "match": {
-          "pathRegex": "^/collections(/|$)",
-          "queryKeys": [],
-          "templateHash": "c1562-d999-da2595-ld0-template-collection"
+          "templateHash": "c1562-d999-da2581-ld0-template-collection-scroll-down"
         },
         "buckets": {
           "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
+            "image": {
+              "sel": "#product_grid > li:nth-of-type(1) > div.product-grid-item__inner\\a \\ \\ \\ \\ group\\ relative\\a \\ \\ \\ \\ before\\:absolute\\a \\ \\ \\ \\ before\\:-bottom-0\\a \\ \\ \\ \\ before\\:-left-0\\a \\ \\ \\ \\ before\\:-right-0\\a \\ \\ \\ \\ before\\:-top-0\\a \\ \\ \\ \\ before\\:z-\\[-1\\]\\a \\ \\ \\ \\ before\\:bg-main-background\\a \\ \\ \\ \\ before\\:shadow-\\[0px_6px_24px_0px_\\#D3D4D5\\]\\a \\ \\ \\ \\ before\\:content-\\[\\'\\'\\]\\a \\a \\ \\ \\ \\ focus-within\\:z-10\\a \\a \\ \\ \\ \\ \\a \\ \\ \\ \\ lg\\:gap-5\\a \\a \\ \\ \\ \\ lg\\:before\\:-bottom-6\\a \\ \\ \\ \\ lg\\:before\\:-left-6\\a \\ \\ \\ \\ lg\\:before\\:-right-6\\a \\ \\ \\ \\ lg\\:before\\:-top-6\\a \\ \\ \\ \\ lg\\:before\\:content-none\\a \\a \\ \\ \\ \\ lg\\:hover\\:z-10\\a \\ \\ \\ \\ lg\\:hover\\:before\\:content-\\[\\'\\'\\] > div.relative\\ grid\\ grid-cols-1\\ gap-3\\ text-sm:nth-of-type(1) > div.grid\\ grid-cols-1\\ gap-1\\ px-2\\ lg\\:pt-3\\ pt-0\\ lg\\:p-0\\ product_card--content:nth-of-type(2) > a.overflow-hidden\\ font-bold\\ text-main-text\\ after\\:absolute\\ after\\:bottom-0\\ after\\:left-0\\ after\\:right-0\\ after\\:top-0\\ after\\:content-\\[\\'\\'\\]\\ lg\\:hover\\:text-main-primary",
+              "attr": "src"
             },
             "price": {
-              "text": true,
-              "textLen": true
-            },
-            "image": {
-              "attr": "src"
+              "sel": "#product_grid > li:nth-of-type(1) > div.product-grid-item__inner\\a \\ \\ \\ \\ group\\ relative\\a \\ \\ \\ \\ before\\:absolute\\a \\ \\ \\ \\ before\\:-bottom-0\\a \\ \\ \\ \\ before\\:-left-0\\a \\ \\ \\ \\ before\\:-right-0\\a \\ \\ \\ \\ before\\:-top-0\\a \\ \\ \\ \\ before\\:z-\\[-1\\]\\a \\ \\ \\ \\ before\\:bg-main-background\\a \\ \\ \\ \\ before\\:shadow-\\[0px_6px_24px_0px_\\#D3D4D5\\]\\a \\ \\ \\ \\ before\\:content-\\[\\'\\'\\]\\a \\a \\ \\ \\ \\ focus-within\\:z-10\\a \\a \\ \\ \\ \\ \\a \\ \\ \\ \\ lg\\:gap-5\\a \\a \\ \\ \\ \\ lg\\:before\\:-bottom-6\\a \\ \\ \\ \\ lg\\:before\\:-left-6\\a \\ \\ \\ \\ lg\\:before\\:-right-6\\a \\ \\ \\ \\ lg\\:before\\:-top-6\\a \\ \\ \\ \\ lg\\:before\\:content-none\\a \\a \\ \\ \\ \\ lg\\:hover\\:z-10\\a \\ \\ \\ \\ lg\\:hover\\:before\\:content-\\[\\'\\'\\] > div.relative\\ grid\\ grid-cols-1\\ gap-3\\ text-sm:nth-of-type(1) > div.grid\\ grid-cols-1\\ gap-1\\ px-2\\ lg\\:pt-3\\ pt-0\\ lg\\:p-0\\ product_card--content:nth-of-type(2) > a.overflow-hidden\\ font-bold\\ text-main-text\\ after\\:absolute\\ after\\:bottom-0\\ after\\:left-0\\ after\\:right-0\\ after\\:top-0\\ after\\:content-\\[\\'\\'\\]\\ lg\\:hover\\:text-main-primary",
+              "attr": "text"
             }
           },
-          "list": [
-            "a[href*='/product']"
-          ],
-          "anchors": [
-            "a[href*='/product']",
-            "[id*='product-grid'] .grid__item a[href]",
-            ".collection .grid__item a[href]",
-            "[id*='product-grid'] .collection-product a[href]"
-          ],
           "containers": [
-            "[id*='product-grid'] .grid__item",
-            ".collection .grid__item",
-            "[id*='product-grid'] .collection-product",
             ".flex.flex-col.lg:gap-10.lg:grid.lg:grid-cols-3.lg:justify-between.lg:p-14.pt-15",
             ".link-item",
             ".focus-inset.link.link--text.list-menu__item.menu-drawer__menu-item",
@@ -142,64 +161,38 @@
         },
         "metrics": {
           "runs": 2,
-          "avgItems": 103,
-          "lastSeen": "2025-11-04T03:15:14.066Z"
+          "avgItems": 76,
+          "lastSeen": "2025-11-08T04:09:04.889Z"
         }
       }
     ]
   },
-  "nike.com": {
+  "bestbuy.ca": {
     "profiles": [
       {
-        "id": "mhk1ijy5-nbv6q",
+        "id": "mhprui4p-v8wp0",
         "match": {
-          "pathRegex": "^/ca(/|$)",
-          "queryKeys": [],
-          "templateHash": "c890-d561-da1186-ld0-nds-no-scroll"
+          "templateHash": "c270-d50-da2120-ld0-"
         },
         "buckets": {
           "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
             "image": {
+              "sel": "div.mb-3:nth-of-type(1) > a.link_3hcyN\\ block\\ w-full > div.productImageContainer_lUChg\\ touchActionManipulation_yFnrY\\ productItemImage_1en8J\\ plpProductItemImage_2lgnr\\ productImageBgColor_2ppCK\\ productImageAllowParentBgColor_1q0xJ\\ applyResponsiveSquareTrick_287yz > div > div.style-module_displayingImage__bb7KB > div.style-module_sliderTarget__z6XJY",
               "attr": "src"
             },
+            "title": {
+              "sel": "div.h-fit\\ w-full\\ pl-4\\ pr-0\\ flex\\ flex-1\\ flex-col\\ sm\\:p-0:nth-of-type(2) > #\\31 9464726-0-0-caption > div.w-full\\ \\[grid-area\\:content\\]:nth-of-type(1) > a.link_3hcyN\\ productInfoLink_27rlM\\ inline-block\\ w-full\\ text-v2-tech-black:nth-of-type(1) > h3.productItemName_3IZ3c\\ m-0\\ mb-1 > span.truncate_gQkhK",
+              "attr": "text"
+            },
             "price": {
-              "text": true,
-              "textLen": true
+              "sel": "#\\31 9464726-0-0-caption > div.w-full\\ \\[grid-area\\:content\\]:nth-of-type(1) > div.productPricingContainer_3gTS3:nth-of-type(1) > span > div.style-module_price__ql4Q1\\ style-module_medium__ROCVS > div",
+              "attr": "text"
             }
           },
-          "list": [
-            "div.product-card.product-grid__card a[href]"
-          ],
-          "anchors": [
-            "div.product-card.product-grid__card a[href]"
-          ],
           "containers": [
-            ".filter-item.is--button.is--default",
-            ".filter-item.is--default.is--link",
-            ".filter-item.is--button.is--size",
-            ".filter-item.is--color.is--link",
-            ".product-card.product-grid__card",
-            ".product-card__body",
-            ".product-card__link-overlay",
-            ".product-card__img-link-overlay",
-            ".product-card__hero-image",
-            ".disable-animations.for--product.product-card__info",
-            ".accent--color.product-card__messaging",
-            ".product-card__titles",
-            ".product-card__title",
-            ".product-card__subtitle",
-            ".product-card__animation_wrapper",
-            ".product-card__price-wrapper",
-            ".product-card__price",
-            ".product-price__wrapper",
-            ".ca__styling.is--current-price.product-price",
-            ".disable-animations.product-card__info"
+            ".[grid-template-areas:'content'_'button'].flex-grow.grid.grid-rows-[1fr_auto].justify-items-start.text-left",
+            ".[grid-area:content].w-full",
+            ".[grid-area:button].w-full"
           ],
           "broad": [
             "main a[href]",
@@ -214,531 +207,8 @@
         },
         "metrics": {
           "runs": 2,
-          "avgItems": 23,
-          "lastSeen": "2025-11-04T16:25:00.838Z"
-        }
-      }
-    ]
-  },
-  "jefedefilas.com": {
-    "profiles": [
-      {
-        "id": "mhkoxoe1-yai5p",
-        "match": {
-          "pathRegex": "^/en(/|$)",
-          "queryKeys": [],
-          "templateHash": "c250-d999-da799-ld1-gradient-animate--hover-default"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            },
-            "image": {
-              "attr": "src"
-            }
-          },
-          "list": [
-            "[id*='product-grid'] .grid__item a[href]"
-          ],
-          "anchors": [
-            "[id*='product-grid'] .grid__item a[href]"
-          ],
-          "containers": [
-            ".focus-inset.link.link--text.list-menu__item.menu-drawer__menu-item",
-            ".card-wrapper.product-card-wrapper.underline-links-hover",
-            ".card.card--media.card--standard",
-            ".card-information",
-            ".price-item.price-item--regular",
-            ".price-item.price-item--last.price-item--sale"
-          ],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 2,
-          "avgItems": 10,
-          "lastSeen": "2025-11-04T15:54:57.855Z"
-        }
-      }
-    ]
-  },
-  "hpgbrands.com": {
-    "profiles": [
-      {
-        "id": "mhksb63c-4hey2",
-        "match": {
-          "pathRegex": "^/new(/|$)",
-          "queryKeys": [],
-          "templateHash": "c629-d746-da343-ld1-page-category-logo-position-left"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
-            "image": {
-              "attr": "src"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            }
-          },
-          "list": [
-            "div.ss__results.product-grid.grid-container.product-grid-usd a[href]"
-          ],
-          "anchors": [
-            "div.ss__results.product-grid.grid-container.product-grid-usd a[href]"
-          ],
-          "containers": [
-            ".search__brands-dropdown-item.test",
-            ".ss__expanded.ss__facet.ss__facet--list.ss__sidebar--item",
-            ".main-navigation-item.main-navigation-item-parent",
-            ".main-navigation-item-toggle",
-            ".main-navigation-item.main-navigation-item-all",
-            ".main-navigation-item",
-            ".has-children.main-navigation-item",
-            ".grid-item.product-grid-item.ss__result.ss__result--item",
-            ".grid-item-image-container.ratio-1-1",
-            ".grid-item-image.lazyloaded.ls-is-cached",
-            ".grid-item-overlay",
-            ".focus-outline.grid-item-overlay-link",
-            ".product-card__logo",
-            ".product-grid-item-name",
-            ".product-card__details-wrapper",
-            ".here.product-card__details-wrapper",
-            ".grid-item-compare",
-            ".grid-item-image.lazyload",
-            ".footer__link-item"
-          ],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 2,
-          "avgItems": 48,
-          "lastSeen": "2025-11-04T16:32:37.300Z"
-        }
-      },
-      {
-        "id": "default",
-        "match": {
-          "pathRegex": "^/(/|$)",
-          "queryKeys": [],
-          "templateHash": "c0-d0-da0-ld0-"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            },
-            "image": {
-              "attr": "src"
-            },
-            "sku": [],
-            "href": {
-              "attr": "href"
-            }
-          },
-          "anchors": [],
-          "containers": [],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 1,
-          "avgItems": 0,
-          "lastSeen": "2025-11-04T20:39:56.431Z"
-        }
-      },
-      {
-        "id": "mhlev1qg-eer2y",
-        "match": {
-          "pathRegex": "^/best-sellers(/|$)",
-          "queryKeys": [],
-          "templateHash": "c640-d705-da342-ld1-page-category-logo-position-left"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
-            "image": {
-              "attr": "src"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            }
-          },
-          "list": [
-            "div.ss__results.product-grid.grid-container.product-grid-usd a[href]",
-            "ul a[href]"
-          ],
-          "anchors": [
-            "div.ss__results.product-grid.grid-container.product-grid-usd a[href]",
-            "ul a[href]"
-          ],
-          "containers": [
-            ".search__brands-dropdown-item.test",
-            ".ss__expanded.ss__facet.ss__facet--list.ss__sidebar--item",
-            ".main-navigation-item.main-navigation-item-parent",
-            ".main-navigation-item-toggle",
-            ".main-navigation-item.main-navigation-item-all",
-            ".main-navigation-item",
-            ".has-children.main-navigation-item",
-            ".grid-item.product-grid-item.ss__result.ss__result--item",
-            ".grid-item-image-container.ratio-1-1",
-            ".grid-item-overlay",
-            ".focus-outline.grid-item-overlay-link",
-            ".product-card__logo",
-            ".product-grid-item-name",
-            ".product-card__details-wrapper",
-            ".here.product-card__details-wrapper",
-            ".grid-item-compare",
-            ".grid-item-image.lazyloaded.ls-is-cached",
-            ".grid-item-image.lazyload",
-            ".footer__link-item"
-          ],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 7,
-          "avgItems": 21,
-          "lastSeen": "2025-11-05T03:30:50.650Z"
-        }
-      }
-    ]
-  },
-  "tentree.ca": {
-    "profiles": [
-      {
-        "id": "mhl0xvf8-5zw8v",
-        "match": {
-          "pathRegex": "^/collections(/|$)",
-          "queryKeys": [],
-          "templateHash": "c454-d132-da2488-ld0-min-h-screen-lang-en"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
-            "image": {
-              "attr": "src"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            }
-          },
-          "list": [
-            "div.border-0.mx-4.--with-title-takeover.min-h-\\[3544px\\].--375px.\\(iPhone.SE\\)\\[5365px\\].--640px\\[2328px\\].--768px\\[2714px\\].--1024px\\[3265px\\].--1280px\\[3837px\\].--1536px a[href]"
-          ],
-          "anchors": [
-            "div.border-0.mx-4.--with-title-takeover.min-h-\\[3544px\\].--375px.\\(iPhone.SE\\)\\[5365px\\].--640px\\[2328px\\].--768px\\[2714px\\].--1024px\\[3265px\\].--1280px\\[3837px\\].--1536px a[href]"
-          ],
-          "containers": [
-            ".mb-8.product-group-card.product-item",
-            ".product-image-container.relative",
-            ".justify-between.mt-2.product-attr-container.relative"
-          ],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 1,
-          "avgItems": 68,
-          "lastSeen": "2025-11-04T20:31:19.996Z"
-        }
-      }
-    ]
-  },
-  "blueland.com": {
-    "profiles": [
-      {
-        "id": "mhl0zpji-39mus",
-        "match": {
-          "pathRegex": "^/collections(/|$)",
-          "queryKeys": [],
-          "templateHash": "c25-d387-da171-ld1-grow-transition-[padding-top]"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
-            "image": {
-              "attr": "src"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            }
-          },
-          "list": [
-            "div.py-contained.mx-auto.grid.w-full.max-w-content-max-width.\\!pt-0 a[href]"
-          ],
-          "anchors": [
-            "div.py-contained.mx-auto.grid.w-full.max-w-content-max-width.\\!pt-0 a[href]"
-          ],
-          "containers": [],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 1,
-          "avgItems": 5,
-          "lastSeen": "2025-11-04T20:32:45.837Z"
-        }
-      }
-    ]
-  },
-  "staples.ca": {
-    "profiles": [
-      {
-        "id": "mhl11p9u-zx47r",
-        "match": {
-          "pathRegex": "^/collections(/|$)",
-          "queryKeys": [],
-          "templateHash": "c300-d291-da268-ld1-404-not-found-template-404"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
-            "image": {
-              "attr": "src"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            }
-          },
-          "list": [
-            "#staples-wrapper-container a[href]"
-          ],
-          "anchors": [
-            "#staples-wrapper-container a[href]"
-          ],
-          "containers": [
-            ".accessible-megamenu-top-nav-item",
-            ".megamenu-item",
-            ".footer__column--list-item",
-            ".card-body",
-            ".ais-facet--item",
-            ".ais-facet--item.extended-facet",
-            ".ais-facet--item.jss14",
-            ".ais-hits--item",
-            ".ais-hit.h-100.position-relative.product-thumbnail",
-            ".product-thumbnail__header",
-            ".product-thumbnail__image-wrap",
-            ".product-link",
-            ".product-thumbnail__image",
-            ".product-thumbnail__information-container",
-            ".product-thumbnail__information",
-            ".product-thumbnail__icon",
-            ".product-link.product-thumbnail__title",
-            ".product-thumbnail__rating",
-            ".product-thumbnail__footer",
-            ".product-thumbnail__data-wrap.relative",
-            ".product-thumbnail__price"
-          ],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 2,
-          "avgItems": 77,
-          "lastSeen": "2025-11-04T20:35:26.924Z"
-        }
-      },
-      {
-        "id": "default",
-        "match": {
-          "pathRegex": "^/(/|$)",
-          "queryKeys": [],
-          "templateHash": "c0-d0-da0-ld0-"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            },
-            "image": {
-              "attr": "src"
-            },
-            "sku": [],
-            "href": {
-              "attr": "href"
-            }
-          },
-          "anchors": [],
-          "containers": [],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 1,
-          "avgItems": 0,
-          "lastSeen": "2025-11-04T20:38:12.250Z"
-        }
-      }
-    ]
-  },
-  "stanley1913.com": {
-    "profiles": [
-      {
-        "id": "mhlg0bhl-vs40q",
-        "match": {
-          "pathRegex": "^/collections(/|$)",
-          "queryKeys": [],
-          "templateHash": "c4673-d177-da8628-ld1-gradient-body-collection"
-        },
-        "buckets": {
-          "fields": {
-            "title": {
-              "text": true
-            },
-            "href": {
-              "attr": "href"
-            },
-            "image": {
-              "attr": "src"
-            },
-            "price": {
-              "text": true,
-              "textLen": true
-            }
-          },
-          "list": [
-            "div.ais-hits-container.ais-results-as-block a[href]"
-          ],
-          "anchors": [
-            "div.ais-hits-container.ais-results-as-block a[href]"
-          ],
-          "containers": [
-            ".c-navigation__subcategory-list-item.c-navigation__subcategory-list-item--link",
-            ".c-navigation__subcategory-list-item.c-navigation__subcategory-list-item--swatch",
-            ".c-navigation__subcategory-list-item",
-            ".ais-RefinementList-item.ais-facet--item",
-            ".ais-Hits-item",
-            ".productCard",
-            "product-swatches",
-            ".ais-Pagination-item.ais-Pagination-item--page.algoliaPagination__item"
-          ],
-          "broad": [
-            "main a[href]",
-            "body a[href]"
-          ],
-          "candidates": [
-            "[data-product]",
-            "[data-item]",
-            "[data-sku]",
-            "[itemscope][itemtype*='Product']"
-          ]
-        },
-        "metrics": {
-          "runs": 2,
-          "avgItems": 36,
-          "lastSeen": "2025-11-05T15:19:34.107Z"
+          "avgItems": 1,
+          "lastSeen": "2025-11-08T04:15:40.743Z"
         }
       }
     ]
